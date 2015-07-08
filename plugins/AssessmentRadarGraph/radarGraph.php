@@ -57,7 +57,7 @@ $DataSet->AddPoint($aSerie2,"Serie2");
   
  // Finish the graph  
  $Test->drawLegend(15,15,$DataSet->GetDataDescription(),255,255,255);  
- $Test->setFontProperties("Fonts/tahoma.ttf",10);  
+ $Test->setFontProperties("/var/www/pwo-vadvies/limesurvey-devop/LimeSurvey/fonts/DejaVuSans.ttf",10);  
  $Test->drawTitle(0,22,"Example 8",50,50,50,400);  
  
   // Save to tmp folder to embed in html and pdf report
@@ -73,10 +73,12 @@ $DataSet->AddPoint($aSerie2,"Serie2");
 	// Sample survey with 3 assessment groups
     	$t_json = '{ "surveyid": "1258", "assessmentgroup": [ { "groupname": "Example 1", "title": "Example 1 assessment", "min": 0, "max": 10, "score": 5, "ref": '.rand(1,10).' }, { "groupname": "Example 2", "title": "Example 2 assessment", "min": 0, "max": 10, "score": 3, "ref": '.rand(1,10).' }, { "groupname": "Example 3", "title": "Example 3 assessment", "min": 0, "max": 10, "score": 7, "ref": '.rand(1,10).' } ] }';
 	
-	echo "Example input: ".$t_json . "<br />";
 	
     	$demo_assessment = json_decode($t_json);
 
+	echo "Example input: ";
+        print_r($demo_assessment);
+	echo "<br />";
     	echo "Filename: <a href='http://alexander.khleuven.be/pwo-vadvies/limesurvey-devop/LimeSurvey/tmp/upload/".generateRadarGraph($demo_assessment)."'>Link to file</a>";
     } else { /*echo ""; // TESTING PURPOSES */ } 
 ?>
