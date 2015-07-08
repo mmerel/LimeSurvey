@@ -1782,8 +1782,14 @@ function doAssessment($surveyid, $returndataonly=false)
             }
         }
         $assessments = "";
+	$data_only = array('total'=>$total);
+
         if (isset($subtotal) && is_array($subtotal))
         {
+	    if ($returndataonly==true) {
+                $data_only["assessmentgroup"] = array();
+            }
+
             foreach($subtotal as $key=>$val)
             {
                 if (isset($assessment['group'][$key]))
@@ -1803,6 +1809,15 @@ function doAssessment($surveyid, $returndataonly=false)
                             </td>
                             </tr>
                             </table><br />\n";
+                        }
+			if ($returndataonly==true) {
+                            $data_only["assessmentgroup"][] = 
+						(object) array (
+						"groupname"=>$assessed['name'],
+						"perc"=>$val, "total"=>$total, 
+						"max"=>$assessed['max'], "min" => $assessed['min'],
+						"message"=>$assessed['message']);
+
                         }
                     }
                 }
@@ -1831,7 +1846,7 @@ function doAssessment($surveyid, $returndataonly=false)
         }
         if ($returndataonly==true)
         {
-            return array('total'=>$total);
+            return $data_only;
         }
         else
         {
